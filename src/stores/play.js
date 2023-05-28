@@ -6,6 +6,51 @@ import {useBeatStore} from "@/stores/beat"
 import {useSpeedStore} from "@/stores/speed"
 import {useVoiceStore} from "@/stores/voice"
 import Speech from 'speak-tts' //
+import { IoTDataPlaneClient, PublishCommand } from "@aws-sdk/client-iot-data-plane";
+import { Amplify } from 'aws-amplify';
+import { Auth } from '@aws-amplify/auth';
+
+async function publishToIoTTopic(message) {
+	const credentials = await Auth.currentCredentials();
+
+	const client = new IoTDataPlaneClient({
+		region: "us-east-1",
+		credentials: {
+			accessKeyId: credentials.accessKeyId,
+			secretAccessKey: credentials.secretAccessKey,
+			sessionToken: credentials.sessionToken,
+		},
+	});
+
+	const command = new PublishCommand({
+		topic: 'user/input',
+		payload: JSON.stringify(message),
+	});
+
+	try {
+		const data = await client.send(command);
+		console.log("Data published successfully", data);
+	} catch (error) {
+		console.log("An error occurred", error);
+		const credentials = await Auth.currentCredentials();
+		console.log(credentials);
+
+	}
+}
+
+Amplify.configure({
+	Auth: {
+		// REQUIRED - Amazon Cognito Identity Pool ID
+		identityPoolId: 'us-east-1:8aa80d16-dbed-4c5c-bd37-811ff00df62f',
+		// REQUIRED - Amazon Cognito Region
+		region: 'us-east-1',
+		// OPTIONAL - Amazon Cognito User Pool ID
+		userPoolId: 'us-east-1_sMVcwbzfj',
+		// OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
+		userPoolWebClientId: 'cutkv6l3b7ep3i4s3ki0iclas',
+	}
+});
+
 
 export const usePlayStore = defineStore('play', () => {
   // const player = document.getElementById('audio1')
@@ -41,15 +86,30 @@ export const usePlayStore = defineStore('play', () => {
   let timer
   let timer2
 
+
   // const isIos = /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)
 
   beat = useBeatStore().beat
+
 
   function play() {
     beatCount.value = 0
     rhythmCount.value = 0
     isPlaying.value = true
     playBeat()
+
+    var message = {
+      metronomeID: 125, // replace with actual metronome ID
+      inputDATA: {
+        bpm: speed,
+        time_signature: beat,
+      }
+    };
+
+
+    publishToIoTTopic(message);
+
+
   }
   function stop() {
     isPlaying.value = false
