@@ -27,7 +27,7 @@ const confirm = ( { selectedValue, selectedOptions })=>{
       text: item.join('/'),
       value: item.join('/'),
     }))"
-    title="选择拍子"
+    title="Select Beat"
     @confirm="confirm"
   ></nut-picker>
 </template>

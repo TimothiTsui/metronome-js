@@ -26,7 +26,7 @@ const confirm = ( { selectedValue, selectedOptions })=>{
       text: item.name,
       value: item.id,
     }))"
-    title="选择节奏"
+    title="Select Rhythm"
     @confirm="confirm"
   ></nut-picker>
 </template>

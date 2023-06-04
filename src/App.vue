@@ -8,7 +8,7 @@ import Voice from "./components/Voice.vue";
 </script>
 
 <template>
-  <p class="title">节拍器</p>
+  <p class="title">Metronome</p>
   <main>
     <Speed></Speed>
     <div class="flex">
