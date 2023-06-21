@@ -41,7 +41,7 @@ async function publishToIoTTopic(message) {
 Amplify.configure({
 	Auth: {
 		// REQUIRED - Amazon Cognito Identity Pool ID
-		identityPoolId: 'us-east-1:8aa80d16-dbed-4c5c-bd37-811ff00df62f',
+		identityPoolId: 'us-east-1:227c7f3e-340b-4c24-9905-176c3e865d93',
 		// REQUIRED - Amazon Cognito Region
 		region: 'us-east-1',
 		// OPTIONAL - Amazon Cognito User Pool ID
