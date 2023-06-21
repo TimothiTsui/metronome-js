@@ -56,15 +56,15 @@ export const usePlayStore = defineStore('play', () => {
   // const player = document.getElementById('audio1')
   // const player2 = document.getElementById('audio2')
 
-  const player = new Audio('./audio/beat1.mp3')
-  const player2 = new Audio('./audio/beat2.mp3')
+  const player = new Audio('public/audio/beat1.mp3')
+  const player2 = new Audio('public/audio/beat2.mp3')
 
   const speech = new Speech()
   speech.init({
     volume: 1,
     rate: 1,
     pitch: 1,
-    lang: 'zh-CN',
+    lang: 'en-US',
   })
 
   player.volumn = 1
