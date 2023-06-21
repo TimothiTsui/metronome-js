@@ -44,7 +44,7 @@ Amplify.configure({
 		identityPoolId: 'us-east-1:227c7f3e-340b-4c24-9905-176c3e865d93',
 		// REQUIRED - Amazon Cognito Region
 		region: 'us-east-1',
-    userPoolWebClientId: '3j7am80dfis1ir2ppdvjij42fj',
+    userPoolWebClientId: '1j3nfbjq1iaej3gnel8noeb62s',
     userPoolId: 'us-east-1_LyHAQQmsf',
 
 	}
