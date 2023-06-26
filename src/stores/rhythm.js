@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia'
-import {RHYTHM_OPTIONS, DEF_RHYTHM} from '@/constants'
+import {SONG_OPTIONS, DEF_SONG} from '@/constants'
 import {ref, computed} from 'vue'
 
 export const useRhythmStore = defineStore('rhythm', () => {
-  const rhythmId = ref(DEF_RHYTHM)
-  const rhythm = computed(() => {
-    return RHYTHM_OPTIONS.find(item => item.id === rhythmId.value) || {}
+  const SongId = ref(DEF_SONG)
+  const name = computed(() => {
+    return SONG_OPTIONS.find(item => item.id === SongId.value) || {}
   })
 
-  function setRhythm(val) {
-    rhythmId.value = val
+  function setSong(val) {
+    SongId.value = val
   }
 
-  return { rhythmId, rhythm, setRhythm }
+  return { SongId, name, setSong }
 })
